@@ -39,11 +39,13 @@ const primeNumber = num => {
 	return true;
 };
 (function drawTable() {
+	const rowSize = 17;
+	const cellSize = 6;
 	let val = 0;
-	for (let r = 0; r < 17; r++) {
+	for (let r = 0; r < rowSize; r++) {
 		const row = document.createElement('tr');
 
-		for (let c = 0; c < 6; c++) {
+		for (let c = 0; c < cellSize; c++) {
 			const cell = document.createElement('td');
 			const cellText = document.createTextNode(val);
 
