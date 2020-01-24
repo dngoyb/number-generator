@@ -6,6 +6,26 @@ const heading2 = document.getElementsByTagName('h3');
 const wrapper = document.querySelector('.wrapper');
 const table = document.createElement('table');
 
+let form = document.createElement('form');
+form.method = 'GET';
+
+form.innerHTML = `<input type="text" id="input" placeholder="Enter a value">
+	<input type="submit" id="btn" value="Generate" onclick()='myFunc'>`;
+
+wrapper.appendChild(form);
+
+const input = document.querySelector('input');
+const btn = document.querySelector('#btn');
+
+function myFunc() {
+	btn.addEventListener('click', e => {
+		e.preventDefault();
+		return input.value;
+	});
+}
+
+myFunc();
+
 title[0].style.textAlign = 'center';
 title[0].style.margin = '0px';
 title[0].style.padding = '0px';
@@ -38,13 +58,17 @@ const primeNumber = num => {
 	}
 	return true;
 };
+
 (function drawTable() {
-	const rowSize = 17;
-	const cellSize = 6;
+	let total = 100;
+	let cellSize = 6;
+	const rowSize = Math.round(total / cellSize);
 	let val = 0;
 	for (let r = 0; r < rowSize; r++) {
 		const row = document.createElement('tr');
-
+		if (r === rowSize - 1) {
+			cellSize = total % cellSize;
+		}
 		for (let c = 0; c < cellSize; c++) {
 			const cell = document.createElement('td');
 			const cellText = document.createTextNode(val);
@@ -75,3 +99,4 @@ const primeNumber = num => {
 })();
 
 table.style.margin = '0px auto';
+console.log(10 % 6);
