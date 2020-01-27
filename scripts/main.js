@@ -18,13 +18,14 @@ const input = document.querySelector('input');
 const btn = document.querySelector('#btn');
 
 function myFunc() {
-	btn.addEventListener('click', e => {
-		e.preventDefault();
-		return input.value;
-	});
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        drawTable(15);
+        drawTable(input.value);
+    });
 }
 
-myFunc();
+setTimeout(myFunc, 500);
 
 title[0].style.textAlign = 'center';
 title[0].style.margin = '0px';
@@ -42,61 +43,67 @@ heading2[0].style.margin = '0px';
 heading2[0].style.padding = '0px';
 
 const oddEven = num => {
-	if (num % 2 === 0) {
-		return true;
-	} else {
-		return false;
-	}
+    if (num % 2 === 0) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 const primeNumber = num => {
-	if (num < 2) return false;
-	for (let i = 2; i < num; i++) {
-		if (num % i === 0 && i !== num) {
-			return false;
-		}
-	}
-	return true;
+    if (num < 2) return false;
+    for (let i = 2; i < num; i++) {
+        if (num % i === 0 && i !== num) {
+            return false;
+        }
+    }
+    return true;
 };
 
-(function drawTable() {
-	let total = 100;
-	let cellSize = 6;
-	const rowSize = Math.round(total / cellSize);
-	let val = 0;
-	for (let r = 0; r < rowSize; r++) {
-		const row = document.createElement('tr');
-		if (r === rowSize - 1) {
-			cellSize = total % cellSize;
-		}
-		for (let c = 0; c < cellSize; c++) {
-			const cell = document.createElement('td');
-			const cellText = document.createTextNode(val);
+const drawTable = total => {
+    let cellSize = 6;
+    const rowSize = Math.round(total / cellSize);
 
-			cell.style.border = '1px solid #ffffff';
-			cell.style.width = '103px';
-			cell.style.height = '33px';
-			cell.style.textAlign = 'center';
-			cell.style.color = 'white';
-			cell.style.fontSize = '24px';
-			if (oddEven(val)) {
-				cell.style.backgroundColor = '#21BF73';
-			} else {
-				cell.style.backgroundColor = '#FDDB3A';
-			}
-			if (primeNumber(val)) {
-				cell.style.backgroundColor = '#FD5E53';
-			}
-			val += 1;
-			cell.appendChild(cellText);
-			row.appendChild(cell);
-		}
+    // if (rowSize < 6) {
+    //     cellSize = rowSize;
+    // }
+    let val = 0;
+    for (let r = 0; r < rowSize; r++) {
+        const row = document.createElement('tr');
+        if (r === rowSize - 1) {
+            cellSize = total % cellSize;
+        }
+        console.log(cellSize);
+        for (let c = 0; c < cellSize; c++) {
+            const cell = document.createElement('td');
+            const cellText = document.createTextNode(val);
 
-		table.appendChild(row); // add the row to the end of the table body
-	}
+            cell.style.border = '1px solid #ffffff';
+            cell.style.width = '103px';
+            cell.style.height = '33px';
+            cell.style.textAlign = 'center';
+            cell.style.color = 'white';
+            cell.style.fontSize = '24px';
+            if (oddEven(val)) {
+                cell.style.backgroundColor = '#21BF73';
+            } else {
+                cell.style.backgroundColor = '#FDDB3A';
+            }
+            if (primeNumber(val)) {
+                cell.style.backgroundColor = '#FD5E53';
+            }
+            val += 1;
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
 
-	wrapper.appendChild(table); // appends <table> into <div1>
-})();
+        table.appendChild(row); // add the row to the end of the table body
+    }
+
+    wrapper.appendChild(table); // appends <table> into <div1>
+};
+
+// drawTable(11);
 
 table.style.margin = '0px auto';
 console.log(10 % 6);
